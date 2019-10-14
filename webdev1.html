@@ -3,14 +3,19 @@
 <head>
 	<meta charset="utf-8">
 	<title>Leaflet Map</title>
+    <header>
+    <h1>Web Developement 1 Map</h1>
+    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
+    </header>
     <!-- External Stylesheets -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    
 </head>
 <body>
     <!-- Our web map and content will go here -->
     <!-- Add the Leaflet JavaScript library -->
     <div id="map" style="width: 705px; height: 375px"></div>
-    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
     <script>
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
