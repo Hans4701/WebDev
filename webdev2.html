@@ -3,13 +3,16 @@
 <head>
 	<meta charset="utf-8">
 	<title>Leaflet Map</title>
-    <header>
-    <h1>Web Developement 1 Map</h1>
-    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
+    <header id="header">
+    <h2>Leaflet Map</h2>
+    <h3> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
+    <h5 class="right"> GIS 4533 | Web-based GIS | Keely Hansen </h5>
     </header>
     
-    <!-- External Stylesheets -->
+    <!-- Linking to External Resources/Stylesheets -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    
+    <script src= "//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js"></script>
     
     <!--    Added parameters to allow full screen web map from http://www.d3noob.org/2014/02/make-your-leafletjs-map-full-screen.html -->
     <style>
@@ -21,7 +24,50 @@
             height: 100%;
             width: 100%;
         }
+        #map {
+            top: 60px;
+        }
+        /* Header styling*/ 
+        #header {
+            /* position at the top of the page */
+            top: 0;
+            /* make it full width */
+            width: 100%
+            /*make it visible on top of the map */
+            z-index: 999999;
+            /* fixed position within body*/
+            position: fixed;
+            /* position this far from the top of the page */
+            height: 60px;
+            /* white text */
+            color: white;
+            /* blue background */
+            background-color: cadetblue;
+            /* add spacing */
+            padding-left: 12px;
+            /* not overlapping map */
+            overflow: hidden;
+            /* different font */
+            font-family: Helvetica, sans-serif;
+        }
+        
+        #header {
+            /* everything on same line */
+            display: inline-block;
+            margin-right: 20px;
+            margin-top: 10px;
+        }
+        
+        /* bring items right */
+        .right {float:right;}
+        
+        /* link or anchor tag (<a>) styling */
+        a {color: blue}
+        
+        /* text inline with other text in header */
+        #header h5 {margin-top: 25px;}
     </style>
+    
 </head>
     
 <body>
@@ -55,18 +101,17 @@
     [42.362681, -71.089830], [42.361829, -71.079230]],
     {color: 'blue', weight: 4}).addTo(map); 
     
+     // Create cuctom airplane markeer for airports.csv
+        var myAirplane = L.icon({
+            iconUrl: 'https://raw.githubusercontent.com/gis4533-fall2019/webdev-unit/master/airport.png' ,
+            iconSize: [40,40],})
+        
     // Create airports feature from airports.csv
     var myAirportsCsv = omnivore.csv('https://raw.githubusercontent.com/gis4533-fall2019/webdev-unit/master/airports.csv' , null, customLayer).addTo(map);
         
     // Create custom layer as template for airports layer
     // Code from http://kristofj-umn.github.io/webdev-f19/assignments/webdev2.html
         var customLayer = L.geoJson(null, {pointToLayer: function (feature, latlong) {return L.marker (latlong, {icon: myAirplane});}});
-        
-    // Create cuctom airplane markeer for airports.csv
-        var myAirplane = L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/gis4533-fall2019/webdev-unit/master/airport.png' ,
-            iconSize: [40,40], //size of the icon
-        })
         
     </script>
     
