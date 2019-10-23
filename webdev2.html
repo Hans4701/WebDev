@@ -76,6 +76,7 @@
     <div id="map"></div>
     
     <!--  removed div code with pixels  <div id="map" style="width: 705px; height: 375px"></div>-->
+    
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
     
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js'></script>
@@ -101,7 +102,7 @@
     [42.362681, -71.089830], [42.361829, -71.079230]],
     {color: 'blue', weight: 4}).addTo(map); 
     
-     // Create cuctom airplane markeer for airports.csv
+     // Create custom airplane marker for airports.csv
         var myAirplane = L.icon({
             iconUrl: 'https://raw.githubusercontent.com/gis4533-fall2019/webdev-unit/master/airport.png' ,
             iconSize: [40,40],})
