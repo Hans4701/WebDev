@@ -37,11 +37,19 @@
     <script>  
         
     // Create variable to hold map element, give initial settings to map
-    var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 12});
+    var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 14});
     
     // Add new base map layer to map from http://leaflet-extras.github.io/leaflet-providers/preview/
     L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC' }).addTo(map);
         
+    // Create feature for Duluth City Hall
+    var myDataPoint = L.marker([46.783829, -92.105275]).addTo(map);
+        
+     // Create line feature for Duluth Aerial Lift Bridge
+    var myDataLine = L.polyline([[46.779324, -92.093135], [46.778568, -92.092609]],
+    {color: 'red', weight: 8}).addTo(map);
+        
+    
     </script>
     
 </body>
