@@ -17,6 +17,8 @@
             height: 100%;
             width: 100%;
         }
+        
+        
     </style>
     
 </head>
@@ -24,12 +26,17 @@
 <body>
     
     <header>
-    <h1>Web Developement 1 Map</h1>
-    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
+        <h1> <p style="font-family: serif; color: darkgreen; font-size: 30px;">Web Developement Map </p> </h1>
+            
+        <h3> <p style="font-family: serif; color: darkgrey; font-size: 16px;">GIS 4533 Web-based GIS <br> Keely Hansen <br> <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </p> </h3>
+        
     </header>
     
     <!--    Added parameters to allow full screen map, removed pixel dimentions from http://www.d3noob.org/2014/02/make-your-leafletjs-map-full-screen.html-->
     <div id="map"></div>
+    
+    <!--    container for displaying map coordinates-->
+    <pre id= 'info'></pre>
     
     <!--  removed div code with pixels  <div id="map" style="width: 705px; height: 375px"></div>-->
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
@@ -62,6 +69,17 @@
         
      // Bind popup to data area feature
     myArea.bindPopup("<h3>Bayfront Festival Park</h3><p>Duluth, MN<br>Information about Bayfront Festival Park.</p>");
+        
+        
+    // Add map coordinates on mouse move
+    // https://docs.mapbox.com/,apbox-gl-js/example/mouse-position/
+    // demonstration in class from Kris Johnson
+    map.on('mousemove', function (e) {
+        console.log ('mousemove', e);
+        document.getElementById('info').innerHTML=
+        "Map Corrdinates: " +JSON.stringify(e.latlng);
+    });
+        
         
     </script>   
     
