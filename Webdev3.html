@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Leaflet Map</title>
+    
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <!--    Added parameters to allow full screen web map from http://www.d3noob.org/2014/02/make-your-leafletjs-map-full-screen.html -->
+    
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        html, body, #map {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    
+</head>
+    
+<body>
+    
+    <header>
+    <h1>Web Developement 1 Map</h1>
+    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
+    </header>
+    
+    <!--    Added parameters to allow full screen map, removed pixel dimentions from http://www.d3noob.org/2014/02/make-your-leafletjs-map-full-screen.html-->
+    <div id="map"></div>
+    
+    <!--  removed div code with pixels  <div id="map" style="width: 705px; height: 375px"></div>-->
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    
+    <script>  
+        
+    // Create variable to hold map element, give initial settings to map
+    var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 14});
+    
+    // Add new base map layer to map from http://leaflet-extras.github.io/leaflet-providers/preview/
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', { attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC' }).addTo(map);
+        
+    // Create point feature for Duluth City Hall, style and add to map
+    var myDataPoint = L.marker([46.783829, -92.105275]).addTo(map);
+        
+     // Create line feature for Duluth Aerial Lift Bridge, style and add to map
+    var myDataLine = L.polyline([[46.779324, -92.093135], [46.778568, -92.092609]],
+    {color: 'red', weight: 8}).addTo(map);
+        
+    // Create area feature for Bayfront Festival Park, style and add to map
+    var myArea = L.polygon([[46.776731, -92.102158], [46.778545, -92.105065],
+    [46.780397, -92.102330], [46.779897, -92.101407], [46.779295, -92.101986], [46.778318, -92.100066]],
+    {color: 'blue', weight: 4}).addTo(map);
+        
+    // Bind popup to data point feature
+    myDataPoint.bindPopup("<h3>Duluth City Hall</h3><p>Duluth, MN<br>Information about City Hall</p>");
+        
+    // Bind popup to data line feature
+    myDataLine.bindPopup("<h3>Duluth Aerial Lift Bridge</h3><p>Duluth, MN<br>Information about the Duluth Aerial Lift Bridge</p>");
+        
+     // Bind popup to data area feature
+    myArea.bindPopup("<h3>Bayfront Festival Park</h3><p>Duluth, MN<br>Information about Bayfront Festival Park.</p>");
+        
+    </script>   
+    
+</body>
+</html>
