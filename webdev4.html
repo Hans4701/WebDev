@@ -25,21 +25,95 @@
     
     <header>
     <h1>Web Developement 1 Map</h1>
-    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
+    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
     </header>
     
     <!--    Added parameters to allow full screen map, removed pixel dimentions from http://www.d3noob.org/2014/02/make-your-leafletjs-map-full-screen.html-->
     <div id="map"></div>
     
-    <!--  removed div code with pixels  <div id="map" style="width: 705px; height: 375px"></div>-->
+    <!--  Leaflet Library --> 
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+    
+    <!--    Add JQuery JavaScript Library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     
     <script>
     // Create variable to hold map element, give initial settings to map
-    var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
+    var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 14});
     
     // Add OpenStreetMap tile layer to map element
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+        
+    // load GeoJSON from an external file        
+        $.getJSON("duluth_precincts_WGS84.geojson",function(data){
+
+    // add GeoJSON layer to the map once the file is loaded
+    L.geoJson(data,{
+        style: function (feature) {
+
+    // calculate third party percent of vote using function
+    var thirdPartyPct = calculateThirdPartyPct(feature);
+
+    // assign colors from the ColorBrewer yellow-green scale
+    var fill;
+            
+    // equal interval classification
+    // 7% or less
+    if (thirdPartyPct <= 7) {
+        fill = '#f7fcb9';
+        }
+            
+    // 11% or less
+    else if (thirdPartyPct <= 11) {
+        fill = '#addd8e';
+        }
+    
+    // 12% or more
+    else {
+        fill = '#31a354';
+        }
+
+    // FIXME: remove existing symbolization and create a diverging
+    // symbology based the democrat or republic vote as a percent
+    // of the total vote.
+    // Use Colorbrewer's 5-class Red-Blue colors for this
+    // http://colorbrewer2.org/#type=diverging&scheme=RdBu&n=5
+
+    // return style specification
+        return {
+            color: '#636363',
+            weight: 2,
+            fillColor: fill,
+            fillOpacity: 0.7
+            }
+        },
+
+    // do something to each feature
+    // in this case create a popup
+     onEachFeature: function (feature, layer) {
+        var thirdPartyPct = calculateThirdPartyPct(feature);
+    // show name of precinct and third party percent in popup
+        layer.bindPopup(
+        "<h3>" + feature.properties.PCTNAME + "</h3>" +
+        "<p>Third Party Vote: " + thirdPartyPct + "%</p>");
+        }
+    }).addTo(map);
+    });	
+
+    // a function that takes a feature and returns the percent of the vote
+    // that doesn't belong to Republican or Democrat (ie. Third Party)
+        function calculateThirdPartyPct(feature) {
+        var demVote = feature.properties.USPRSDFL;
+        var repVote = feature.properties.USPRSR;
+        var totalVote = feature.properties.USPRSTOTAL;
+    // third party vote is whatever is left over from dem and rep vote
+        var thirdPartyVote = (totalVote - demVote - repVote);
+    // calculate as a percent of the total vote
+        var thirdPartyPct = Math.round(thirdPartyVote/totalVote*100);
+    // return the third party percent for this feature
+        return thirdPartyPct;
+        }
+        
     </script>
     
 </body>
