@@ -28,7 +28,7 @@
     <header>
         <h1> <p style="font-family: serif; color: darkgreen; font-size: 30px;">Web Developement Map </p> </h1>
             
-        <h3> <p style="font-family: serif; color: darkgrey; font-size: 16px;">GIS 4533 Web-based GIS <br> Keely Hansen <br> <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </p> </h3>
+        <h3> <p style="font-family: serif; color: darkgrey; font-size: 16px;">GIS 4533 Web-based GIS <br> Keely Hansen <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </p> </h3>
         
     </header>
     
@@ -61,14 +61,14 @@
     [46.780397, -92.102330], [46.779897, -92.101407], [46.779295, -92.101986], [46.778318, -92.100066]],
     {color: 'blue', weight: 4}).addTo(map);
         
-    // Bind popup to data point feature
-    myDataPoint.bindPopup("<h3>Duluth City Hall</h3><p>Duluth, MN<br>Information about City Hall</p>");
+    // Bind popup to data point feature, style picture
+    myDataPoint.bindPopup("<h3>Duluth City Hall</h3><p>Duluth, MN<br>Information about City Hall <br> <img src='City-Hall.png' </p>");
         
-    // Bind popup to data line feature
+    // Bind popup to data line feature, style, picture
     myDataLine.bindPopup("<h3>Duluth Aerial Lift Bridge</h3><p>Duluth, MN<br>Information about the Duluth Aerial Lift Bridge <br> <img src= 'Lift-Bridge.png'</p>");
         
-     // Bind popup to data area feature
-    myArea.bindPopup("<h3>Bayfront Festival Park</h3><p>Duluth, MN<br>Information about Bayfront Festival Park.</p>");
+     // Bind popup to data area feature, style, picture
+    myArea.bindPopup("<h3>Bayfront Festival Park</h3><p>Duluth, MN<br>Information about Bayfront Festival Park <br> <img src='Bayfront-Festival-Park.png'</p>");
         
         
     // Add map coordinates on mouse move
@@ -80,7 +80,7 @@
         "Map Corrdinates: " +JSON.stringify(e.latlng);
     });
         
-        
+
     </script>   
     
 </body>
