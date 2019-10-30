@@ -39,14 +39,14 @@
     
     <script>
     // Create variable to hold map element, give initial settings to map
-    var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 14});
+    var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 11});
     
     // Add OpenStreetMap tile layer to map element
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
         
-    // load GeoJSON from an external file        
-        $.getJSON("duluth_precincts_WGS84.geojson",function(data){
-
+    // load GeoJSON from an external file, $=JQuery, data=GeoJSON Data      
+    $.getJSON("1duluth_precincts_WGS84.geojson",function(data){
+        
     // add GeoJSON layer to the map once the file is loaded
     L.geoJson(data,{
         style: function (feature) {
