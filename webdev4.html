@@ -41,11 +41,16 @@
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 11});
     
+    // Add new base map here *
+        
     // Add OpenStreetMap tile layer to map element
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
         
     // load GeoJSON from an external file, $=JQuery, data=GeoJSON Data      
     $.getJSON("1duluth_precincts_WGS84.geojson",function(data){
+    
+    // For searching geojson data
+    console.log('geojson data', data);
         
     // add GeoJSON layer to the map once the file is loaded
     L.geoJson(data,{
@@ -63,7 +68,7 @@
                 fill = '#f7fcb9';
                 }
             
-            // 11% or less
+            // 8% to 11%
             else if (thirdPartyPct <= 11) {
                 fill = '#addd8e';
                 }
@@ -86,7 +91,7 @@
             fillColor: fill,
             fillOpacity: 0.7
             }
-            },
+            }, // End of $.geoJSON function
 
             // do something to each feature
             // in this case create a popup
