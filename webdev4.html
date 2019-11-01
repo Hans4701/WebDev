@@ -64,9 +64,9 @@
         style: function (feature) {
 
             // calculate third party percent of vote using function
-            var thirdPartyPct = calculateThirdPartyPct(feature);
+            var DemPartyPct = calculate.DemPartyPct(feature);
 
-            // assign colors from the ColorBrewer yellow-green scale
+            // assign colors from the ColorBrewer yellow-green scale 
             var fill;
             
             // equal interval classification
@@ -95,13 +95,10 @@
                 fill = '#0571b0';
                 }
 
-            // FIXME: remove existing symbolization and create a diverging
-            // symbology based the democrat or republic vote as a percent
-            // of the total vote.
-            // Use Colorbrewer's 5-class Red-Blue colors for this
-            // http://colorbrewer2.org/#type=diverging&scheme=RdBu&n=5
+            // created a divergingsymbology based the democrat or republic vote as a percent of the total vote.
+            // Used Colorbrewer's 5-class Red-Blue colors for this http://colorbrewer2.org/#type=diverging&scheme=RdBu&n=5
 
-            // return style specification
+            // return style specification: outline 
             return {
             color: '#636363',
             weight: 2,
@@ -110,30 +107,29 @@
             }
             }, // End of $.geoJSON function
 
-            // do something to each feature
-            // in this case create a popup
+            // created a popup
             onEachFeature: function (feature, layer) {
-            var thirdPartyPct = calculateThirdPartyPct(feature);
+            var DemPartyPct = calculateDemPartyPct(feature);
             // show name of precinct and third party percent in popup
             layer.bindPopup(
             "<h3>" + feature.properties.PCTNAME + "</h3>" +
-            "<p>Third Party Vote: " + thirdPartyPct + "%</p>");
+            "<p>Deocratic Party Vote: " + thirdPartyPct + "%</p>");
             }
             }).addTo(map);
             });	
 
             // a function that takes a feature and returns the percent of the vote
             // that doesn't belong to Republican or Democrat (ie. Third Party)
-            function calculateThirdPartyPct(feature) {
+            function calculateDemPartyPct(feature) {
             var demVote = feature.properties.USPRSDFL;
             var repVote = feature.properties.USPRSR;
             var totalVote = feature.properties.USPRSTOTAL;
-            // third party vote is whatever is left over from dem and rep vote
-            var thirdPartyVote = (totalVote - demVote - repVote);
-            // calculate as a percent of the total vote
-            var thirdPartyPct = Math.round(thirdPartyVote/totalVote*100);
-            // return the third party percent for this feature
-            return thirdPartyPct;
+            // democratic vote is total votes divided y democratic vote to equal decimal
+            var DemPartyVote = (demVote/totalVote);
+            // calculate as a percent of the total democratic votes
+            var DemPartyVotePct = Math.round(DemPartyVote/totalVote*100);
+            // return the democratic party percent for this feature
+            return DemPartyVotePartyPct;
             }
         
     </script>
