@@ -24,8 +24,8 @@
 <body>
     
     <header>
-    <h1>Web Developement 1 Map</h1>
-    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <a href="https://leafletjs.com">I built this with Leaflet</a> </h3>
+    <h1>Duluth, MN Republican- Democratic Voting Results</h1>
+    <h3>GIS 4533 Web-based GIS <br> Keely Hansen <br> <a href="https://leafletjs.com">Built using Leaflet</a> </h3>
     </header>
     
     <!--    Added parameters to allow full screen map, removed pixel dimentions from http://www.d3noob.org/2014/02/make-your-leafletjs-map-full-screen.html-->
@@ -70,19 +70,29 @@
             var fill;
             
             // equal interval classification
-            // 7% or less
-            if (thirdPartyPct <= 7) {
-                fill = '#f7fcb9';
+            // 5% or less
+            if (thirdPartyPct <= 5) {
+                fill = '#ca0020';
                 }
             
-            // 8% to 11%
-            else if (thirdPartyPct <= 11) {
-                fill = '#addd8e';
+            // 6% to 10%
+            else if (thirdPartyPct <= 10) {
+                fill = '#f4a582';
+                }
+            
+            // 11% to 15%
+            else if (thirdPartyPct <= 15) {
+                fill = '#f7f7f7';
+                }
+            
+            // 16% to 20%
+            else if (thirdPartyPct <= 20) {
+                fill = '#92c5de';
                 }
         
-            // 12% or more
+            // 21% or more
             else {
-                fill = '#31a354';
+                fill = '#0571b0';
                 }
 
             // FIXME: remove existing symbolization and create a diverging
