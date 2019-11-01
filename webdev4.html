@@ -41,10 +41,17 @@
     // Create variable to hold map element, give initial settings to map
     var map = L.map('map',{ center: [46.782518, -92.105790], zoom: 11});
     
-    // Add new base map here *
+    // Add new base map here
+        L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 20,
+	ext: 'png'
+        }).addTo(map);
         
-    // Add OpenStreetMap tile layer to map element
-    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+    // Add OpenStreetMap tile layer to map element, Changed Basemap
+    // L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
         
     // load GeoJSON from an external file, $=JQuery, data=GeoJSON Data      
     $.getJSON("1duluth_precincts_WGS84.geojson",function(data){
