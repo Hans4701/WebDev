@@ -64,40 +64,41 @@
         style: function (feature) {
 
             // Add more ** calculate party percent of vote using function
-            var DemPartyPct = calculate.DemPartyPct(feature);
+            var PartyPct = calculatePartyPct(feature);
+            console.log(PartyPct);
 
             // assign colors from the ColorBrewer yellow-green scale 
             var fill;
             
             // equal interval classification
             // rep 40%
-            if (votePcts.rep <= 40) {
+            if (PartyPct.rep >= 40) {
                 fill = '#ca0020';
                 console.log('rep40');
                 }
             
             // rep 30%
-            else if (votePcts.rep <= 35) {
+            else if (PartyPct.rep >= 35) {
                 fill = '#f4a582';
                 console.log('rep35');
                 }
             
             // else party 
-            else if (votePcts.rep <= 30) {
+            else if (PartyPct.rep <= 34 && PartyPct.dem <= 59) {
                 fill = '#f7f7f7';
-                console.log ('else');
+                console.log ('neutral vote');
                 }
             
             // dem 60
-            else if (votePcts.dem <= 60) {
+            else if (PartyPct.dem <= 60) {
                 fill = '#92c5de';
-                console.log('dem35');
+                console.log('dem60');
                 }
         
             // dem 65% or more 
             else {
                 fill = '#0571b0';
-                console.log('else');
+                console.log('dem65');
                 }
 
             // created a divergingsymbology based the democrat or republic vote as a percent of the total vote.
@@ -112,14 +113,14 @@
             }
             }, // End of $.geoJSON function
 
-            // Add more ** created a popup
+            // created a popup
             onEachFeature: function (feature, layer) {
-            var demPct = calculatedemPct(feature);
-            var repPct = calculaterepPct(feature);
+            var PartyPct = calculatePartyPct(feature);
             // show name of precinct and party percent in popup
             layer.bindPopup(
             "<h3>" + feature.properties.PCTNAME + "</h3>" +
-            "<p>Party Vote: " + PartyPct + "%</p>");
+            "<p> Democratic Party Vote:" + PartyPct.dem + "%</p>" 
+                + "<p>Republican Party Vote:" + PartyPct.rep + "%</p>");
             }
             }).addTo(map);
             });	
@@ -130,7 +131,7 @@
             var demVote = feature.properties.USPRSDFL;
             var repVote = feature.properties.USPRSR;
             var totalVote = feature.properties.USPRSTOTAL;
-           
+            
 
             // calculate as a percent of the total democratic votes
             var demPct = Math.round(demVote/totalVote*100);
@@ -139,9 +140,9 @@
             var repPct = Math.round(repVote/totalVote*100);    
             
             // return the democratic party percent for this feature
-            return {rep: repPct;
-                    dem: demPct;
-            }
+            return {rep: repPct,
+                    dem: demPct
+            }};
         
     </script>
     
