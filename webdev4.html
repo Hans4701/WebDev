@@ -63,36 +63,41 @@
     L.geoJson(data,{
         style: function (feature) {
 
-            // calculate third party percent of vote using function
+            // Add more ** calculate party percent of vote using function
             var DemPartyPct = calculate.DemPartyPct(feature);
 
             // assign colors from the ColorBrewer yellow-green scale 
             var fill;
             
             // equal interval classification
-            // 5% or less
-            if (thirdPartyPct <= 5) {
+            // rep 40%
+            if (votePcts.rep <= 40) {
                 fill = '#ca0020';
+                console.log('rep40');
                 }
             
-            // 6% to 10%
-            else if (thirdPartyPct <= 10) {
+            // rep 30%
+            else if (votePcts.rep <= 35) {
                 fill = '#f4a582';
+                console.log('rep35');
                 }
             
-            // 11% to 15%
-            else if (thirdPartyPct <= 15) {
+            // else party 
+            else if (votePcts.rep <= 30) {
                 fill = '#f7f7f7';
+                console.log ('else');
                 }
             
-            // 16% to 20%
-            else if (thirdPartyPct <= 20) {
+            // dem 
+            else if (votePcts.dem <= 35) {
                 fill = '#92c5de';
+                console.log('dem35');
                 }
         
-            // 21% or more
+            // dem 65% or more 
             else {
                 fill = '#0571b0';
+                console.log('else');
                 }
 
             // created a divergingsymbology based the democrat or republic vote as a percent of the total vote.
@@ -120,16 +125,21 @@
 
             // a function that takes a feature and returns the percent of the vote
             // that doesn't belong to Republican or Democrat (ie. Third Party)
-            function calculateDemPartyPct(feature) {
+            function calculatePartyPct(feature) {
             var demVote = feature.properties.USPRSDFL;
             var repVote = feature.properties.USPRSR;
             var totalVote = feature.properties.USPRSTOTAL;
-            // democratic vote is total votes divided y democratic vote to equal decimal
-            var DemPartyVote = (demVote/totalVote);
+           
+
             // calculate as a percent of the total democratic votes
-            var DemPartyVotePct = Math.round(DemPartyVote/totalVote*100);
+            var demPct = Math.round(demVote/totalVote*100);
+                
+            // calculate as a percent of the total replublican votes
+            var repPct = Math.round(repVote/totalVote*100);    
+            
             // return the democratic party percent for this feature
-            return DemPartyVotePartyPct;
+            return {rep: 
+                    dem: 
             }
         
     </script>
