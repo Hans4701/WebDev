@@ -58,12 +58,7 @@
         // set up popup for MN County Boundaries layer
         MNCountyBoundariesLayer.bindPopup(function(evt) {
             return L.Util.template(
-                '<table>' +
-                '<tr><td>LOCATION:</td><td>{LOCATION}</td></tr>' +
-                '<tr><td>YEAR:</td><td>{YEAR}</td></tr>' +
-                '<tr><td>MAGNITUDE:</td><td>{MAGNITUDE}</td></tr>' +
-                '</table>',
-                evt.feature.properties);
+                '<h3>{CTY_NAME}</h3>', evt.feature.properties);
         });
 
     </script>
